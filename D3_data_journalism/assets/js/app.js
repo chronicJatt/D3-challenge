@@ -30,6 +30,30 @@ function makeResponsive() {
     // Append group element
     var chartGroup = svg.append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+    // Initial Params
+    var chosenXAxis = 'poverty';
+    var chosenYAxis = 'healthcare';
+
+    // Function for updating xScale upon user selection
+    function xScale(csvData, chosenXAxis) {
+        var xLinearScale = d3.scaleLinear()
+            .domain([d3.min(csvData, d => d[chosenXAxis]) * 0.8,
+            d3.max(csvData, d => d[chosenXAxis]) * 1.2])
+            .range([0, width]);
+        return xLinearScale;
+    }
+
+    // Function for updating yScale upon user selection
+    function yScale(csv, chosenYAxis) {
+        var yLinearScale = d3.scaleLinear()
+            .domain([d3.min(csvData, d => d[chosenYAxis]) * 08,
+            d3.max(csvData, d => d[chosenYAxis]) * 1.2])
+            .range([heigh, 0]);
+        return yLinearScale;
+    }
+
+    
     
     // Read in data csv
     d3.csv('assets/data/data.csv').then(function(csvData) {
