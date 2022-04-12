@@ -35,7 +35,7 @@ function makeResponsive() {
     var chosenXAxis = 'poverty';
     var chosenYAxis = 'healthcare';
 
-    // Function for updating xScale upon user selection
+    // Function for updating xScale upon user interaction
     function xScale(csvData, chosenXAxis) {
         var xLinearScale = d3.scaleLinear()
             .domain([d3.min(csvData, d => d[chosenXAxis]) * 0.8,
@@ -44,7 +44,7 @@ function makeResponsive() {
         return xLinearScale;
     }
 
-    // Function for updating yScale upon user selection
+    // Function for updating yScale upon user interaction
     function yScale(csv, chosenYAxis) {
         var yLinearScale = d3.scaleLinear()
             .domain([d3.min(csvData, d => d[chosenYAxis]) * 08,
@@ -53,8 +53,38 @@ function makeResponsive() {
         return yLinearScale;
     }
 
+    // Function for updating xAxis upon user interaction
+    function renderXAxes(newXScale, xAxis) {
+        var bottomAxis = d3.axisBottom(newXScale);
+        xAxis.transition()
+            .duration(1000)
+            .call(bottomAxis);
+        return xAxis;
+    }
+
+    // Function for updating xAxis upon user interaction
+    function renderYAxes(newYScale, yAxis) {
+        var leftAxis = d3.axisLeft(newYScale);
+        yAxis.transition()
+            .duration(1000)
+            .call(leftAxis);
+        return yAxis;
+    }
     
-    
+    // Function used for updating circles group with a transition to new circles
+    function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
+        circlesGroup.transition()
+            .duration(1000)
+            .attr('cx', d => newXScale(d[chosenXAxis]))
+            .attr('cy', d => newYScale(d[chosenYAxis]));
+        return circlesGroup;
+    }
+
+    // Function for updating circles group with new tooltip
+    function updateToolTip(circlesGroup, chosenXAxis, chosenYAxis) {
+        
+    }
+
     // Read in data csv
     d3.csv('assets/data/data.csv').then(function(csvData) {
         
