@@ -175,7 +175,7 @@ function makeResponsive() {
             .call(bottomAxis);
         
         // Append yAxis
-        chartGroup.append('g')
+        var yAxis = chartGroup.append('g')
             .classed('y-axis', true)
             .call(leftAxis);
 
