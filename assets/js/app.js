@@ -91,7 +91,7 @@ function makeResponsive() {
     }
 
     // Function for updating circles group with new tooltip
-    function updateToolTip(circlesGroup, chosenXAxis, chosenYAxis, textGroup) {
+    function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
         
         // If conditionals on x-axis
         if (chosenXAxis === 'poverty') {
@@ -261,7 +261,7 @@ function makeResponsive() {
             .text('Obese (%)');
 
         // Call updateToolTip function
-        var circlesGroup = updateToolTip(circlesGroup, chosenXAxis, chosenYAxis, textGroup);
+        var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup);
 
         // Event listener for xAxis labels
         xLabelsGroup.selectAll('text')
